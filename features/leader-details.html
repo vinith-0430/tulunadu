@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leader Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .header-image {
+      height: 300px;
+      object-fit: cover;
+      border-radius: 1rem;
+      border: 2px solid #ffd580;
+    }
+    .section-title {
+      font-weight: 700;
+      font-size: 1.6rem;
+      margin-top: 2rem;
+      color: #ff8c00;
+      border-bottom: 3px solid #ffd580;
+      padding-bottom: 0.5rem;
+    }
+    .track-card {
+      border-left: 6px solid #ffae42;
+      background: #fff8e1;
+      transition: transform 0.2s;
+    }
+    .track-card:hover {
+      transform: scale(1.02);
+    }
+    .btn-secondary {
+      background-color: #ff8c00;
+      border-color: #ff8c00;
+    }
+    .btn-secondary:hover {
+      background-color: #e07b00;
+      border-color: #e07b00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="feature3.html" class="btn btn-secondary mb-4">← Back to Temples</a>
+
+    <div class="text-center mb-4">
+      <h2 id="leaderName" class="fw-bold text-uppercase">Loading...</h2>
+    </div>
+
+    <!-- Top Images -->
+    <div class="row g-4">
+      <div class="col-md-6">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Adi_Shankara_by_Raja_Ravi_Varma.jpg/800px-Adi_Shankara_by_Raja_Ravi_Varma.jpg" class="img-fluid header-image" id="img1" />
+      </div>
+      <div class="col-md-6">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Vivekananda_photo.jpg/800px-Vivekananda_photo.jpg" class="img-fluid header-image" id="img2" />
+      </div>
+    </div>
+
+    <!-- Details Section -->
+    <div class="section-title">Details</div>
+    <p id="leaderDetails" class="lead">Loading leader info...</p>
+
+    <!-- Track Record -->
+    <div class="section-title">Track Record</div>
+    <div id="trackRecords">
+      <!-- JS Injected -->
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const person = urlParams.get('person');
+
+    const leaderData = {
+      shankara: {
+        name: "ನಂದಳಿಕೆ ಶ್ರೀಕಾಂತ್ ಭಟ್",
+        details: "ಮಣಿಪಾಲದಲ್ಲಿ ಕೃಷಿಕರಾಗಿ ಹೋಟೆಲ್ ಉದ್ಯಮಿಯಾಗಿ ಪರಿವರ್ತನೆಗೊಂಡ ನಂದಳಿಕೆ ಶ್ರೀಕಾಂತ್ ಭಟ್ ಅವರಿಗೆ ಕಂಬಳ ಎಮ್ಮೆಗಳನ್ನು ಸಾಕುವುದು ಒಂದು ಉತ್ಸಾಹ ಮತ್ತು ಹೆಮ್ಮೆಯ ವಿಷಯವಾಗಿದೆ. ಅವರು ಆರು ವರ್ಷಗಳ ಹಿಂದೆ ತಮ್ಮ ಸ್ವಂತ ಡೈರಿಯಿಂದ ಒಂದು ಜೋಡಿ ಮತ್ತು ಹತ್ತಿರದ ಪ್ರಾಣಿಗಳ ತೋಟದಿಂದ ಇನ್ನೆರಡು ಎಮ್ಮೆಗಳನ್ನು ಸಾಕಿದ್ದಾರೆ. ಈಗ ಈ ಪ್ರಾಣಿಗಳು ಅವರಿಗೆ ಕುಟುಂಬಕ್ಕಿಂತ ಕಡಿಮೆಯಿಲ್ಲ.",
+        images: [
+          "https://bangaloremirror.indiatimes.com/photo/56878341.cms",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Adi_Shankara_temple_Kalady.jpg/1280px-Adi_Shankara_temple_Kalady.jpg"
+        ],
+        records: [
+          "Established four mathas (spiritual centers) across India.",
+          "Revived Hinduism during a time of philosophical crisis.",
+          "ಕಂಬಳ ಲೋಕದ ಲೆಜೆಂಡ್ ಕೋಣ ಚಾಂಪಿಯನ್ ಕುಟ್ಟಿ(Champion Kutty) ವಿದಾಯ ಹೇಳಿದ್ದಾನೆ"
+        ]
+      },
+      vivekananda: {
+        name: "Swami Vivekananda",
+        details: "Swami Vivekananda was a 19th-century spiritual leader and a key figure in the introduction of Indian philosophies of Vedanta and Yoga to the Western world.",
+        images: [
+          "https://upload.wikimedia.org/wikipedia/commons/5/5b/Vivekananda_photo.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Swami_Vivekananda_at_Parliament_of_Religions.jpg/800px-Swami_Vivekananda_at_Parliament_of_Religions.jpg"
+        ],
+        records: [
+          "Delivered the iconic speech at the Parliament of the World's Religions in 1893.",
+          "Founded the Ramakrishna Mission.",
+          "Promoted interfaith harmony and spiritual nationalism."
+        ]
+      }
+    };
+
+    const data = leaderData[person];
+    if (data) {
+      document.getElementById('leaderName').textContent = data.name;
+      document.getElementById('leaderDetails').textContent = data.details;
+      document.getElementById('img1').src = data.images[0];
+      document.getElementById('img2').src = data.images[1];
+
+      const recordsContainer = document.getElementById('trackRecords');
+      data.records.forEach(record => {
+        const div = document.createElement('div');
+        div.className = "card p-3 mb-3 track-card";
+        div.innerText = record;
+        recordsContainer.appendChild(div);
+      });
+    } else {
+      document.getElementById('leaderName').textContent = "Leader not found!";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <title>Feature Form - Tulunadu Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-storage-compat.js"></script>
+  <script src="js/firebase.js"></script> <!-- Your Firebase config file -->
+  <style>
+    body {
+      background: linear-gradient(to right, #e2b36f, #f3e1c7);
+      font-family: 'Noto Sans Kannada', sans-serif;
+    }
+    .card {
+      border: 3px solid #6f4e37;
+      background-color: #fff6e5;
+      border-radius: 15px;
+    }
+    .form-label {
+      color: #6f4e37;
+      font-weight: bold;
+    }
+    .btn-tulu {
+      background-color: #9a4d1b;
+      color: white;
+    }
+    .btn-tulu:hover {
+      background-color: #6f3010;
+    }
+  </style>
+</head>
+<body class="p-5">
+  <div class="container">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4" style="color: #6f4e37;">ತುಳುನಾಡು ವಿಶೇಷ ಫಾರ್ಮ್</h2>
+      <form onsubmit="submitFeature(event)">
+        <div class="mb-3">
+          <label for="title" class="form-label">ಶೀರ್ಷಿಕೆ (Title)</label>
+          <input type="text" class="form-control" id="title" required>
+        </div>
+        <div class="mb-3">
+          <label for="story" class="form-label">ಕಥೆ (Story)</label>
+          <textarea class="form-control" id="story" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="event" class="form-label">ಈ ವೇಳೆಯ ಘಟನೆ (Ongoing Event)</label>
+          <input type="text" class="form-control" id="event">
+        </div>
+        <div class="mb-3">
+          <label for="place" class="form-label">ಸ್ಥಳ (Place)</label>
+          <input type="text" class="form-control" id="place" required>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">ದಿನಾಂಕ (Date)</label>
+          <input type="date" class="form-control" id="date" required>
+        </div>
+        <div class="mb-3">
+          <label for="photo" class="form-label">ಫೋಟೋ (Photo)</label>
+          <input type="file" class="form-control" id="photo" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-tulu w-100">ಸಲ್ಲಿಸು (Submit)</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    async function submitFeature(e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const story = document.getElementById("story").value;
+      const event = document.getElementById("event").value;
+      const place = document.getElementById("place").value;
+      const date = document.getElementById("date").value;
+      const photoFile = document.getElementById("photo").files[0];
+
+      if (!photoFile) {
+        alert("ದಯವಿಟ್ಟು ಫೋಟೋ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ!");
+        return;
+      }
+
+      try {
+        // Upload photo to storage
+        const storageRef = firebase.storage().ref('featurePhotos/' + Date.now() + "_" + photoFile.name);
+        await storageRef.put(photoFile);
+        const photoURL = await storageRef.getDownloadURL();
+
+        // Save to Firestore
+        await firebase.firestore().collection("features").add({
+          title,
+          story,
+          event,
+          place,
+          date,
+          photo: photoURL,
+          created_at: new Date()
+        });
+
+        alert("ವಿಶೇಷ ಮಾಹಿತಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!");
+        e.target.reset();
+      } catch (error) {
+        console.error("Error:", error);
+        alert("ದೋಷ ಸಂಭವಿಸಿದೆ: " + error.message);
+      }
+    }
+  </script>
+</body>
+</html>

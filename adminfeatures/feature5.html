@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <title>Feature 5 - Tulunadu Cuisine</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fff4e6;
+      font-family: 'Noto Sans Kannada', sans-serif;
+    }
+
+    .card {
+      background-color: #fff0db;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-control, .btn {
+      border-radius: 10px;
+    }
+
+    .food-block {
+      border: 1px dashed #a0522d;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background: #fdf6f0;
+    }
+
+    h2 {
+      color: #8b2e14;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card p-4">
+      <h2 class="text-center mb-4">ತುಳುನಾಡು ಪಾಕಪದ್ಧತಿ</h2>
+      <form id="feature5Form">
+        <div class="mb-3">
+          <label class="form-label">ಶೀರ್ಷಿಕೆ</label>
+          <input type="text" class="form-control" id="title" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">ವಿವರಣೆ</label>
+          <textarea class="form-control" id="description" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">ಸ್ಥಳ</label>
+          <input type="text" class="form-control" id="location" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">ಚಿತ್ರ</label>
+          <input type="file" class="form-control" id="mainImage" accept="image/*">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">ಆಹಾರಗಳು</label>
+          <div id="foodsContainer"></div>
+          <button type="button" class="btn btn-outline-primary mt-2" onclick="addFood()">+ ಆಹಾರವನ್ನು ಸೇರಿಸಿ</button>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mt-3">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="google_translate_element"></div>
+
+  <script>
+    function addFood() {
+      const foodBlock = document.createElement('div');
+      foodBlock.classList.add('food-block');
+      foodBlock.innerHTML = `
+        <div class="mb-2">
+          <label class="form-label">ಆಹಾರದ ಹೆಸರು</label>
+          <input type="text" class="form-control" name="foodName[]" required>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">ವಿವರಣೆ</label>
+          <textarea class="form-control" name="foodDescription[]" rows="2" required></textarea>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">ಚಿತ್ರಗಳನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ</label>
+          <input type="file" class="form-control" name="foodImages[]" multiple accept="image/*">
+        </div>
+        <div class="mb-2">
+          <label class="form-label">ಪಾಕವಿಧಾನ</label>
+          <textarea class="form-control" name="foodRecipe[]" rows="3" required></textarea>
+        </div>
+        <button type="button" class="btn btn-outline-danger" onclick="removeFood(this)">Remove Food</button>
+      `;
+      document.getElementById('foodsContainer').appendChild(foodBlock);
+    }
+
+    function removeFood(button) {
+      button.parentElement.remove();
+    }
+
+    document.getElementById("feature5Form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("ಆಹಾರದ ಮಾಹಿತಿ ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!");
+      // Here you can handle Firebase upload if needed
+    });
+  </script>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'kn'},
+    )}
+</script>
